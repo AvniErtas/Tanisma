@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class GradientColors {
   static final AlignmentGeometry _beginAlignment = Alignment.topLeft;
   static final AlignmentGeometry _endAlignment = Alignment.bottomRight;
+  static final AlignmentGeometry _beginverticalAlignment = Alignment.topCenter;
+  static final AlignmentGeometry _endverticalAlignment = Alignment.bottomCenter;
+  static final AlignmentGeometry centerAlignment = Alignment.center;
+
 
   static LinearGradient buildGradient(AlignmentGeometry begin, AlignmentGeometry end, List<Color> colors) =>
       LinearGradient(begin: begin, end: end, colors: colors);
@@ -146,7 +150,9 @@ class GradientColors {
     Color(0xff0011FF),
     Color(0xffFFFFFF),
   ]);
+  
 }
+
 
 class KategoriRenkler {
   KategoriRenkler(this.gradient, this.name);

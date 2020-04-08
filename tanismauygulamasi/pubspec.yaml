@@ -26,6 +26,8 @@ dependencies:
   curved_navigation_bar: ^0.3.2
   flutter_swiper: ^1.1.6
   giffy_dialog: ^1.7.0
+  carousel_slider: ^1.4.1
+  flutter_range_slider: "^1.4.0"
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -47,6 +49,7 @@ flutter:
   - images/anasayfaresimler/
   - images/kategoriresimler/
   - images/secimresimleri/
+  - images/digericonlar/
 
 
   

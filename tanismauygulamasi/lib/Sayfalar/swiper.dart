@@ -8,7 +8,12 @@ class TravelNepalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: swiperBolumu(),
+          );
+        }
+      
+        Widget swiperBolumu() {
+          return Stack(
         children: <Widget>[
           ListView(
             children: <Widget>[
@@ -104,7 +109,6 @@ class TravelNepalPage extends StatelessWidget {
             ],
           )
         ],
-      ),
-    );
-  }
+      );
+        }
 }
