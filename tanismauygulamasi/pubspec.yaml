@@ -27,7 +27,8 @@ dependencies:
   flutter_swiper: ^1.1.6
   giffy_dialog: ^1.7.0
   carousel_slider: ^1.4.1
-  flutter_range_slider: "^1.4.0"
+  flutter_range_slider: ^1.4.0
+  gradient_widgets: ^0.5.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
