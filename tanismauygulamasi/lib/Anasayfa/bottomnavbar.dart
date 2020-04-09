@@ -5,12 +5,20 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:tanismauygulamasi/Anasayfa/baslangic.dart';
 import 'package:tanismauygulamasi/Kategoriler/Kategoriler.dart';
 import 'package:tanismauygulamasi/Sayfalar/anasayfa.dart';
+import 'package:tanismauygulamasi/Sayfalar/arkadaslistesi.dart';
 import 'package:tanismauygulamasi/Sayfalar/evethayir.dart';
 import 'package:tanismauygulamasi/Sayfalar/gonderitipi.dart';
+import 'package:tanismauygulamasi/Sayfalar/paylasmabolumu.dart';
+import 'package:tanismauygulamasi/Sayfalar/paylasmasonrasi.dart';
 import 'package:tanismauygulamasi/Sayfalar/profile.dart';
+import 'package:tanismauygulamasi/Sayfalar/sonuc_inceleme.dart';
 import 'package:tanismauygulamasi/Sayfalar/swiper.dart';
+import 'package:tanismauygulamasi/onur_pages/anasayfa2.dart';
+import 'package:tanismauygulamasi/onur_pages/kesfet.dart';
+import 'package:tanismauygulamasi/onur_pages/testler.dart';
 
 import '../Sayfalar/yuzdebolumu.dart';
+import 'abcdTest.dart';
 
 class BottomNavBar extends StatefulWidget {
   @override
@@ -56,113 +64,180 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget bodyBolumu() {
     return SafeArea(
       child: Center(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                  child: Material(
-                    shadowColor: Colors.transparent,
-                    color: Colors.transparent,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.black,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                    child: Material(
+                      shadowColor: Colors.transparent,
+                      color: Colors.transparent,
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.menu,
+                          color: Colors.black,
+                        ),
+                        //onPressed: widget.onMenuPressed,
                       ),
-                      //onPressed: widget.onMenuPressed,
                     ),
                   ),
-                ),
-              ],
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => UserProfilePage()));
-              },
-              child: Text("UserProfilePage"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Kategoriler()));
-              },
-              child: Text("Kategoriler"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => TravelNepalPage()));
-              },
-              child: Text("Swiper"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GonderiTipi()));
-              },
-              child: Text("GonderiSecimi"),
-            ),
-            RaisedButton(
-                color: Colors.teal,
-                child: Text(
-                  "Uyari Ekrani Gif",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
+                ],
+              ),
+              RaisedButton(
                 onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (_) => NetworkGiffyDialog(
-                            image: Image.network(
-                              "https://raw.githubusercontent.com/Shashank02051997/FancyGifDialog-Android/master/GIF's/gif14.gif",
-                              fit: BoxFit.cover,
-                            ),
-                            entryAnimation: EntryAnimation.TOP_LEFT,
-                            title: Text(
-                              'Testi Bitirmek İstiyor Musunuz? ',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  fontSize: 22.0, fontWeight: FontWeight.w600),
-                            ),
-                            /*   description: Text(
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UserProfilePage()));
+                },
+                child: Text("UserProfilePage"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Kategoriler()));
+                },
+                child: Text("Kategoriler"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TravelNepalPage()));
+                },
+                child: Text("Swiper"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => GonderiTipi()));
+                },
+                child: Text("GonderiSecimi"),
+              ),
+              RaisedButton(
+                  color: Colors.teal,
+                  child: Text(
+                    "Uyari Ekrani Gif",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (_) => NetworkGiffyDialog(
+                              image: Image.network(
+                                "https://raw.githubusercontent.com/Shashank02051997/FancyGifDialog-Android/master/GIF's/gif14.gif",
+                                fit: BoxFit.cover,
+                              ),
+                              entryAnimation: EntryAnimation.TOP_LEFT,
+                              title: Text(
+                                'Testi Bitirmek İstiyor Musunuz? ',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 22.0,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              /*   description: Text(
                                 'This is a granny eating chocolate dialog box. This library helps you easily create fancy giffy dialog.',
                                 textAlign: TextAlign.center,
                               ), */
-                            buttonOkText: Text("Evet"),
-                            buttonCancelText: Text("Hayır"),
-                            buttonOkColor: Colors.green,
-                            buttonCancelColor: Colors.red,
-                            onOkButtonPressed: () {},
-                          ));
-                }),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AnaSayfaImage()));
-              },
-              child: Text("Anasayfa"),
-            ),
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => EvetHayirBolumu()));
-              },
-              child: Text("EVET HAYIR BÖLÜMÜ"),
-            ),
-             RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => YuzdeBolumu()));
-              },
-              child: Text("YÜZDE SORU BÖLÜMÜ"),
-            ),
-          ],
+                              buttonOkText: Text("Evet"),
+                              buttonCancelText: Text("Hayır"),
+                              buttonOkColor: Colors.green,
+                              buttonCancelColor: Colors.red,
+                              onOkButtonPressed: () {},
+                            ));
+                  }),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AnaSayfaImage2()));
+                },
+                child: Text("Anasayfa"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EvetHayirBolumu()));
+                },
+                child: Text("EVET HAYIR BÖLÜMÜ"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => YuzdeBolumu()));
+                },
+                child: Text("YÜZDE SORU BÖLÜMÜ"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Kesfet()));
+                },
+                child: Text("KEŞFET"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Testler()));
+                },
+                child: Text("TESTLER"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SonucInceleme()));
+                },
+                child: Text("Sonuc İnceleme"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PaylasmaBolumu()));
+                },
+                child: Text("Paylasma Bolumu"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PaylasmaSonrasi()));
+                },
+                child: Text("Paylasma Sonrasi Bolumu"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ArkadasListesi()));
+                },
+                child: Text("Arkadaş Listesi Bölümü"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AbcdTestBolumu()));
+                },
+                child: Text("Şıklı Test Bölümü "),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
-

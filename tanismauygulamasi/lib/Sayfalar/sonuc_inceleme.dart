@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tanismauygulamasi/Sayfalar/gradientcard.dart';
+import 'package:tanismauygulamasi/onur_pages/gradient.dart';
 
-import 'gradient.dart';
-
-class Testler extends StatelessWidget {
+class SonucInceleme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -28,12 +27,32 @@ class Testler extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.0),
                     child: FlutterLogo(size: 56.0),
                   ),
-                  title: Text('Lorem ipsum dolor sit amet, ante metus, in etiam diam.',style: TextStyle(fontSize: 16),),
+                  title: Text(
+                    'Avni Ertaş',
+                    style: TextStyle(fontSize: 16),
+                  ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 5),
-                    child: Text('Soru Sayısı: 15',textAlign: TextAlign.end,),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          'Test Puanı : ',
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          height: 35,
+                          width: 35,
+                          decoration: BoxDecoration(
+                            color: Colors.indigo,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text("35",style: TextStyle(color: Colors.white,),textAlign: TextAlign.center,),
+                        ),
+                      ],
+                    ),
                   ),
-                  trailing: Icon(Icons.more_vert),
+                  trailing: Icon(Icons.share),
                 ),
               ),
             ),
@@ -41,6 +60,5 @@ class Testler extends StatelessWidget {
         },
       ),
     );
-
   }
 }

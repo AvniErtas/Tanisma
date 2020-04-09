@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 // taken from https://uigradients.com
-class GradientColors {
+class GradientColors2 {
   static final AlignmentGeometry _beginAlignment = Alignment.topLeft;
   static final AlignmentGeometry _endAlignment = Alignment.bottomRight;
 

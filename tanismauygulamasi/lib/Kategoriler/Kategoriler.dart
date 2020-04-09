@@ -35,7 +35,7 @@ Widget kategoriler() {
     "images/kategoriresimler/Aile.png",
     "images/kategoriresimler/Teknoloji.png",
     "images/kategoriresimler/YasamTarzi.png",
-    "images/kategoriresimler/Ask.png",
+    "images/kategoriresimler/ask.png",
     "images/kategoriresimler/Yemek.png",
     "images/kategoriresimler/ahlaki-ikilem.png",
     "images/kategoriresimler/diger.png"
