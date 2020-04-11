@@ -14,18 +14,27 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
   List<int> siklar = new List<int>(5);
   List<Border> border = new List<Border>(4);
   CarouselSlider carouselSlider;
-  int soruNo=0;
+  int soruNo = 0;
   @override
   Widget build(BuildContext context) {
-    heightMedia =  MediaQuery.of(context).size.height;
+    heightMedia = MediaQuery.of(context).size.height;
     widthMedia = MediaQuery.of(context).size.width;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("S.A"),
-      ),
-      body: Container(
-        decoration: BoxDecoration(gradient: GradientColors.arkaplan),
-        child: testevethayirBolumu(),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(gradient: GradientColors.arkaplan),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Icon(Icons.arrow_back,size: 35,)),
+              ),
+              Expanded(child: testevethayirBolumu()),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -57,7 +66,7 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
                       curve: Curves.linear);
                 },
                 child: Container(
-                  height: heightMedia* 0.05,
+                  height: heightMedia * 0.05,
                   width: widthMedia * 0.25,
                   padding: EdgeInsets.all(10),
                   margin: EdgeInsets.all(10),
@@ -100,33 +109,28 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
         itemBuilder: (BuildContext context, int index) {
           return Material(
             color: Colors.white.withOpacity(0.0),
-
             child: InkWell(
               onTap: () => {
-                this.setState((){
-
+                this.setState(() {
                   siklar[soruNo] = index;
 
-                 for(int i=0;i<border.length;i++) {
-                   if(i!=index)
-                   border[i] = null;
-                 }
-                  border[index]= Border.all(width: 5);
-                 carouselSlider.nextPage(
-                     duration: Duration(milliseconds: 300),
-                     curve: Curves.linear);
-                 Future.delayed(const Duration(milliseconds: 500), () {
-                   setState(() {
-                     border[index] = null;
-                   });
-                 });
-
+                  for (int i = 0; i < border.length; i++) {
+                    if (i != index) border[i] = null;
+                  }
+                  border[index] = Border.all(width: 5);
+                  carouselSlider.nextPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.linear);
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    setState(() {
+                      border[index] = null;
+                    });
+                  });
                 })
-
               },
               child: Container(
-                height: heightMedia*0.09,
-                margin: EdgeInsets.fromLTRB(10,5,10,5),
+                height: heightMedia * 0.09,
+                margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                 decoration: BoxDecoration(
                   gradient: renkler[index + 12].gradient,
                   borderRadius: BorderRadius.circular(15.0),
@@ -141,56 +145,53 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
 
   CarouselSlider slider() {
     carouselSlider = CarouselSlider.builder(
-      height: heightMedia*0.27,
-      itemCount: 5,
-      onPageChanged: (index) {
-        setState(() {
-          soruNo = index;
-
-          if(siklar[index]!=null) {
-            for(int i=0;i<border.length;i++) {
-              if(i!=index)
-                border[i] = null;
+        height: heightMedia * 0.27,
+        itemCount: 5,
+        onPageChanged: (index) {
+          setState(() {
+            soruNo = index;
+            for (int i = 0; i < border.length; i++) {
+              border[i] = null;
             }
-            border[index]= Border.all(width: 5);
-          }
+            if (siklar[index] != null) {
+              border[siklar[index]] = Border.all(width: 5);
+            }
+          });
+        },
+        itemBuilder: (BuildContext context, int itemIndex) {
+          return GradientCard(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            gradient: GradientColors.anasayfaswiper,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Bu bir sorudur.??? Soru soru"),
+                  ],
+                ),
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20, bottom: 20),
+                      child: Text('${itemIndex + 1}'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
         });
-      },
-      itemBuilder: (BuildContext context, int itemIndex) {
-       return  GradientCard(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          gradient: GradientColors.anasayfaswiper,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Text("Bu bir sorudur.??? Soru soru"),
-                ],
-              ),
-              Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20, bottom: 20),
-                    child: Text('${itemIndex + 1}'),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      }
-    );
     return carouselSlider;
   }
 }

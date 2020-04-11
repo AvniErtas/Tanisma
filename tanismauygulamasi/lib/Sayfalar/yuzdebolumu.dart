@@ -14,6 +14,8 @@ class YuzdeBolumu extends StatefulWidget {
 class YuzdeBolumuState extends State<YuzdeBolumu> {
   int _current = 0;
   double rating = 50;
+  List<double> yuzdeDeger = new List<double>(5);
+  int soruNo=0;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +52,15 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
   Widget buttonDemo(context) {
     final basicSlider = CarouselSlider.builder(
       itemCount: 5,
+      onPageChanged: (index) {
+        setState(() {
+          soruNo = index;
+          if (yuzdeDeger[index] != null) {
+            rating = yuzdeDeger[index];
+          }
+          else rating = 50.0;
+        });
+      },
       itemBuilder: (BuildContext context, int itemIndex) => GradientCard(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -75,7 +86,7 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 20, bottom: 20),
-                  child: Text("asdf"),
+                  child: Text('$itemIndex'),
                 ),
               ],
             ),
@@ -142,7 +153,7 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
           height: MediaQuery.of(context).size.height * 0.06,
           width: MediaQuery.of(context).size.width * 0.12,
           decoration: BoxDecoration(
-            color: Colors.indigo,
+            color: yuzdeDeger[soruNo]==null ? Colors.indigo : Colors.green,
             borderRadius: BorderRadius.all(Radius.circular(30)),
           ),
           child: Text(
@@ -161,6 +172,7 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
           onChanged: (newRating) {
             setState(() {
               rating = newRating;
+              yuzdeDeger[soruNo] = newRating;
             });
           },
         ),
@@ -201,11 +213,3 @@ Widget sliderGosterge(Animation coloranim) {
     ),
   );
 }
-
-List<Widget> child = [
-  for (int i = 1; i < 10; i++)
-    Text(
-      "BURAYA ARTIK SORULARI KOYABİLİRİZ $i",
-      style: TextStyle(color: Colors.white),
-    ),
-];
