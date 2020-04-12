@@ -29,7 +29,13 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
                 padding: const EdgeInsets.all(4.0),
                 child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Icon(Icons.arrow_back,size: 35,)),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Icon(
+                        Icons.arrow_back,
+                        size: 35,
+                      ),
+                    )),
               ),
               Expanded(child: testevethayirBolumu()),
             ],

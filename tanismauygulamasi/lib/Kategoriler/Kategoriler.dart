@@ -3,6 +3,7 @@ import 'package:tanismauygulamasi/Sayfalar/appbar.dart';
 import 'package:tanismauygulamasi/Sayfalar/gonderitipi.dart';
 import 'package:tanismauygulamasi/Sayfalar/gradientcard.dart';
 import 'package:tanismauygulamasi/Sayfalar/gradientcolor.dart';
+import 'package:tanismauygulamasi/animasyon_widgets/BouncyPageRoute.dart';
 
 class Kategoriler extends StatelessWidget {
   @override
@@ -83,9 +84,11 @@ Widget kategoriView(
   return InkWell(
     onTap: () {
       Navigator.push(
-          (context), MaterialPageRoute(builder: (context) => GonderiTipi()));
+          (context), BouncyPageRoute(widget: GonderiTipi()),
+      );
     },
     child: GradientCard(
+      margin: EdgeInsets.all(5),
       gradient: renkler[index].gradient,
       elevation: 5,
       shape: RoundedRectangleBorder(

@@ -59,7 +59,9 @@ class Kesfet extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
-                  "Bu bir test sorusudur.Soru bir iki uc???",
+                  "Eum perferendis voluptatibus qui illo. Nemo quos voluptatum reiciendis labore reprehenderit iure vel. Optio quod nihil voluptatibus labore ab odio.",
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
                   style: TextStyle(fontSize: 16),
                 ),
               )

@@ -7,12 +7,14 @@ import 'package:tanismauygulamasi/Kategoriler/Kategoriler.dart';
 import 'package:tanismauygulamasi/Sayfalar/anasayfa.dart';
 import 'package:tanismauygulamasi/Sayfalar/arkadaslistesi.dart';
 import 'package:tanismauygulamasi/Sayfalar/evethayir.dart';
+import 'package:tanismauygulamasi/Sayfalar/filterchip.dart';
 import 'package:tanismauygulamasi/Sayfalar/gonderitipi.dart';
 import 'package:tanismauygulamasi/Sayfalar/paylasmabolumu.dart';
 import 'package:tanismauygulamasi/Sayfalar/paylasmasonrasi.dart';
 import 'package:tanismauygulamasi/Sayfalar/profile.dart';
 import 'package:tanismauygulamasi/Sayfalar/sonuc_inceleme.dart';
 import 'package:tanismauygulamasi/Sayfalar/swiper.dart';
+import 'package:tanismauygulamasi/animasyon_widgets/BouncyPageRoute.dart';
 import 'package:tanismauygulamasi/onur_pages/anasayfa2.dart';
 import 'package:tanismauygulamasi/onur_pages/kesfet.dart';
 import 'package:tanismauygulamasi/onur_pages/testler.dart';
@@ -164,9 +166,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
               RaisedButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => EvetHayirBolumu()));
+                    context,
+                    BouncyPageRoute(widget: EvetHayirBolumu()),
+                  );
                 },
                 child: Text("EVET HAYIR BÖLÜMÜ"),
               ),
@@ -233,6 +235,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           builder: (context) => AbcdTestBolumu()));
                 },
                 child: Text("Şıklı Test Bölümü "),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FilterChipDisplay()));
+                },
+                child: Text("Filter Chip Bölümü "),
               ),
             ],
           ),

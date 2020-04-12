@@ -12,6 +12,10 @@ class EvetHayirBolumu extends StatefulWidget {
 
 class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
   int _current = 0;
+  int soruNo = 0;
+  List<int> siklar = new List<int>(5);
+  List<Border> border = new List<Border>(2);
+  CarouselSlider carouselSlider;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +46,26 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  siklar[soruNo] = 0;
+                  border[1] = null; // border'ını temizlemek istediğimiz elemanı null yaptık
+                  border[0] = Border.all(width: 5);
+                  carouselSlider.nextPage(
+                      duration: Duration(milliseconds: 600),
+                      curve: Curves.linear);
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    setState(() {
+                      border[0] = null;
+                    });
+                  });
+                },
                 child: Container(
                   height: 100,
                   width: 100,
                   padding: EdgeInsets.all(10),
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
+                    border: border[0],
                     image: DecorationImage(
                       image: AssetImage("images/digericonlar/evet.png"),
                     ),
@@ -59,13 +76,26 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                    siklar[soruNo] = 1;
+                  border[0] = null; // border'ını temizlemek istediğimiz elemanı null yaptık
+                  border[1] = Border.all(width: 5);
+                  carouselSlider.nextPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.linear);
+                  Future.delayed(const Duration(milliseconds: 500), () {
+                    setState(() {
+                      border[1] = null;
+                    });
+                  });
+                },
                 child: Container(
                   height: 100,
                   width: 100,
                   padding: EdgeInsets.all(10),
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
+                    border: border[1],
                     image: DecorationImage(
                       image: AssetImage("images/digericonlar/hayir.png"),
                     ),
@@ -80,9 +110,22 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
   }
 
   Widget buttonDemo() {
-
-    final basicSlider = CarouselSlider.builder(
+    carouselSlider = CarouselSlider.builder(
       itemCount: 5,
+      onPageChanged: (index) {
+        setState(() {
+          soruNo = index;
+       
+
+          if (siklar[index] != null) {
+           
+            border[siklar[index]] = Border.all(width: 5); // Geri döndüğünde işaret kalsın diye
+          if(siklar[index]==0)
+          border[1]=null;
+          else border[0]=null;
+          }
+        });
+      },
       itemBuilder: (BuildContext context, int itemIndex) => GradientCard(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -108,7 +151,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 20, bottom: 20),
-                  child: Text("asdf"),
+                  child: Text('${itemIndex + 1}'),
                 ),
               ],
             ),
@@ -121,12 +164,12 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          basicSlider,
+          carouselSlider,
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Flexible(
               child: InkWell(
                 onTap: () {
-                  basicSlider.previousPage(
+                  carouselSlider.previousPage(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.linear);
                 },
@@ -146,7 +189,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
             Flexible(
               child: InkWell(
                 onTap: () {
-                  basicSlider.nextPage(
+                  carouselSlider.nextPage(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.linear);
                 },
