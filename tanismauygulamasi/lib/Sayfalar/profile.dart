@@ -1,4 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+import 'appbar.dart';
+import 'gradientcard.dart';
+import 'gradientcolor.dart';
 
 class UserProfilePage extends StatelessWidget {
   final String _fullName = "Nick Frost";
@@ -8,13 +13,13 @@ class UserProfilePage extends StatelessWidget {
   final String _followers = "173";
   final String _posts = "24";
   final String _scores = "450";
-
+  double heightMedia;
   Widget _buildCoverImage(Size screenSize) {
     return Container(
       height: screenSize.height / 2.6,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/cover.jpeg'),
+          image: AssetImage('assets/backg.jpg'),
           fit: BoxFit.cover,
         ),
       ),
@@ -28,7 +33,7 @@ class UserProfilePage extends StatelessWidget {
         height: 140.0,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/nickfrost.jpg'),
+            image: AssetImage('assets/profile.jpeg'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80.0),
@@ -215,8 +220,10 @@ class UserProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    heightMedia = MediaQuery.of(context).size.height;
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: appBarTasarim(), //appbar'ın en sağına ayarlar simgesi konulacak
       body: Stack(
         children: <Widget>[
           _buildCoverImage(screenSize),
@@ -235,6 +242,14 @@ class UserProfilePage extends StatelessWidget {
                   _buildGetInTouch(context),
                   SizedBox(height: 8.0),
                   _buildButtons(),
+                  SizedBox(height: 8.0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Align(alignment: Alignment.centerLeft,child: Text("Son Çözülenler",style: TextStyle(fontSize: 17),)),
+                  ),
+                  SizedBox(height: 8.0),
+                  _buildLastSolved(),
+
                 ],
               ),
             ),
@@ -242,5 +257,48 @@ class UserProfilePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _buildLastSolved() {
+    return  CarouselSlider.builder(
+        height: heightMedia * 0.27,
+        itemCount: 5,
+        onPageChanged: (index) {
+
+        },
+        itemBuilder: (BuildContext context, int itemIndex) {
+          return GradientCard(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            gradient: GradientColors.anasayfaswiper,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Bu bir sorudur.??? Soru soru"),
+                  ],
+                ),
+                Spacer(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20, bottom: 20),
+                      child: Text('${itemIndex + 1}'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

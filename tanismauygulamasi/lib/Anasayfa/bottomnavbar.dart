@@ -12,9 +12,11 @@ import 'package:tanismauygulamasi/Sayfalar/gonderitipi.dart';
 import 'package:tanismauygulamasi/Sayfalar/paylasmabolumu.dart';
 import 'package:tanismauygulamasi/Sayfalar/paylasmasonrasi.dart';
 import 'package:tanismauygulamasi/Sayfalar/profile.dart';
+import 'package:tanismauygulamasi/Sayfalar/settings_yeni.dart';
 import 'package:tanismauygulamasi/Sayfalar/sonuc_inceleme.dart';
 import 'package:tanismauygulamasi/Sayfalar/swiper.dart';
 import 'package:tanismauygulamasi/animasyon_widgets/BouncyPageRoute.dart';
+import 'package:tanismauygulamasi/eslesme/springy.dart';
 import 'package:tanismauygulamasi/eslesme/springy_slider.dart';
 import 'package:tanismauygulamasi/onur_pages/anasayfa2.dart';
 import 'package:tanismauygulamasi/onur_pages/kesfet.dart';
@@ -251,9 +253,18 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SpringySlider()));
+                          builder: (context) => Springy()));
                 },
                 child: Text("EslesmeSpringySlider "),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingsOnePage()));
+                },
+                child: Text("Ayarlar "),
               ),
             ],
           ),

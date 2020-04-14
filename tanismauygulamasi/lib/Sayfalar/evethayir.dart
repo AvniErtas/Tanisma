@@ -14,11 +14,18 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
   int _current = 0;
   int soruNo = 0;
   List<int> siklar = new List<int>(5);
-  List<Border> border = new List<Border>(2);
+  List<double> animatedContainerSize = new List<double>(2);
   CarouselSlider carouselSlider;
 
   @override
+  void initState() {
+    animatedContainerSize[0]=100.0;
+    animatedContainerSize[1]=100.0;
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -36,6 +43,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
   }
 
   Widget testevethayirBolumu() {
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -43,62 +51,64 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
+            InkWell(
+              onTap: () {
+
+                setState(() {
                   siklar[soruNo] = 0;
-                  border[1] = null; // border'ını temizlemek istediğimiz elemanı null yaptık
-                  border[0] = Border.all(width: 5);
-                  carouselSlider.nextPage(
-                      duration: Duration(milliseconds: 600),
-                      curve: Curves.linear);
-                  Future.delayed(const Duration(milliseconds: 500), () {
-                    setState(() {
-                      border[0] = null;
-                    });
+                  animatedContainerSize[0]=150.0;
+                });
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  setState(() {
+                    animatedContainerSize[0]=100.0;
                   });
-                },
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    border: border[0],
-                    image: DecorationImage(
-                      image: AssetImage("images/digericonlar/evet.png"),
-                    ),
+                });
+
+                carouselSlider.nextPage(
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.linear);
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.fastLinearToSlowEaseIn,
+                height: animatedContainerSize[0],
+                width: animatedContainerSize[0],
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+             //       border: border[0],
+                  image: DecorationImage(
+                    image: AssetImage("images/digericonlar/evet.png"),
                   ),
                 ),
               ),
             ),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {
+            InkWell(
+              onTap: () {
+                  setState(() {
                     siklar[soruNo] = 1;
-                  border[0] = null; // border'ını temizlemek istediğimiz elemanı null yaptık
-                  border[1] = Border.all(width: 5);
-                  carouselSlider.nextPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.linear);
+                    animatedContainerSize[1]=150;
+                  });
                   Future.delayed(const Duration(milliseconds: 500), () {
                     setState(() {
-                      border[1] = null;
+                      animatedContainerSize[1]=100;
                     });
                   });
-                },
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    border: border[1],
-                    image: DecorationImage(
-                      image: AssetImage("images/digericonlar/hayir.png"),
-                    ),
+
+                  carouselSlider.previousPage(
+                      duration: Duration(milliseconds: 600),
+                      curve: Curves.linear);
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.fastLinearToSlowEaseIn,
+                height: animatedContainerSize[1],
+                width: animatedContainerSize[1],
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/digericonlar/hayir.png"),
                   ),
                 ),
               ),
@@ -115,15 +125,12 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
       onPageChanged: (index) {
         setState(() {
           soruNo = index;
-       
-
+          animatedContainerSize[0]=100.0;
+          animatedContainerSize[1]=100.0;
           if (siklar[index] != null) {
-           
-            border[siklar[index]] = Border.all(width: 5); // Geri döndüğünde işaret kalsın diye
-          if(siklar[index]==0)
-          border[1]=null;
-          else border[0]=null;
+            animatedContainerSize[siklar[index]] = 150.0;
           }
+
         });
       },
       itemBuilder: (BuildContext context, int itemIndex) => GradientCard(
@@ -163,6 +170,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           carouselSlider,
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
@@ -174,7 +182,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
                       curve: Curves.linear);
                 },
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.10,
+                  height: MediaQuery.of(context).size.height * 0.075,
                   width: MediaQuery.of(context).size.width * 0.25,
                   padding: EdgeInsets.all(10),
                   margin: EdgeInsets.all(10),
@@ -194,7 +202,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
                       curve: Curves.linear);
                 },
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.10,
+                  height: MediaQuery.of(context).size.height * 0.075,
                   width: MediaQuery.of(context).size.width * 0.25,
                   padding: EdgeInsets.all(10),
                   margin: EdgeInsets.all(10),
@@ -211,13 +219,6 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
   }
 }
 
-List<Widget> child = [
-  for (int i = 1; i < 10; i++)
-    Text(
-      "BURAYA ARTIK SORULARI KOYABİLİRİZ $i",
-      style: TextStyle(color: Colors.white),
-    ),
-];
 
 /* Container(
           alignment: Alignment.center,
