@@ -28,6 +28,8 @@ dependencies:
   giffy_dialog: ^1.7.0
   carousel_slider: ^1.4.1
   flutter_range_slider: ^1.4.0
+  flutter_sequence_animation: ^3.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,9 +69,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-      - family: MyFlutterApp
+      - family: roboto
         fonts:
-          - asset: assets/fonts/MyFlutterApp.ttf
+          - asset: assets/fonts/roboto/Roboto-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

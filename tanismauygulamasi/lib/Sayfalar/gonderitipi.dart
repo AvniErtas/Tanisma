@@ -6,7 +6,7 @@ class GonderiTipi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarTasarim(),
+      appBar: appBarTasarim(""),
       body: Container(
         decoration: BoxDecoration(
           gradient: GradientColors.arkaplan,

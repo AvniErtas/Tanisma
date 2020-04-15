@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:tanismauygulamasi/Anasayfa/baslangic.dart';
 import 'package:tanismauygulamasi/Kategoriler/Kategoriler.dart';
-import 'package:tanismauygulamasi/Sayfalar/anasayfa.dart';
 import 'package:tanismauygulamasi/Sayfalar/arkadaslistesi.dart';
 import 'package:tanismauygulamasi/Sayfalar/evethayir.dart';
 import 'package:tanismauygulamasi/Sayfalar/filterchip.dart';
@@ -250,10 +249,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Springy()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Springy()));
                 },
                 child: Text("EslesmeSpringySlider "),
               ),
@@ -273,4 +270,3 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 }
-

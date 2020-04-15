@@ -28,30 +28,37 @@ class UserProfilePage extends StatelessWidget {
 
   Widget _buildProfileImage() {
     return Center(
-      child: Container(
-        width: 140.0,
-        height: 140.0,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/profile.jpeg'),
-            fit: BoxFit.cover,
+      child: Stack(
+        children: <Widget>[
+          Container(
+            width: 140.0,
+            height: 140.0,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/profile.jpeg'),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(80.0),
+              border: Border.all(
+                color: Colors.white,
+                width: 10.0,
+              ),
+            ),
           ),
-          borderRadius: BorderRadius.circular(80.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 10.0,
-          ),
-        ),
+          InkWell(child: Icon(Icons.edit),onTap: (){},),
+        ],
       ),
     );
   }
+  /*                  
+ */
 
   Widget _buildFullName() {
     TextStyle _nameTextStyle = TextStyle(
       fontFamily: 'Roboto',
       color: Colors.black,
       fontSize: 28.0,
-      fontWeight: FontWeight.w700,
+      fontWeight: FontWeight.w600,
     );
 
     return Text(
@@ -73,7 +80,7 @@ class UserProfilePage extends StatelessWidget {
           fontFamily: 'Spectral',
           color: Colors.black,
           fontSize: 20.0,
-          fontWeight: FontWeight.w300,
+          fontWeight: FontWeight.w400,
         ),
       ),
     );
@@ -84,13 +91,14 @@ class UserProfilePage extends StatelessWidget {
       fontFamily: 'Roboto',
       color: Colors.black,
       fontSize: 16.0,
-      fontWeight: FontWeight.w200,
+      fontWeight: FontWeight.w400,
     );
 
     TextStyle _statCountTextStyle = TextStyle(
-      color: Colors.black54,
+      fontFamily: 'Roboto',
+      color: Colors.black,
       fontSize: 24.0,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w600,
     );
 
     return Column(
@@ -118,9 +126,9 @@ class UserProfilePage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          _buildStatItem("Followers", _followers),
-          _buildStatItem("Posts", _posts),
-          _buildStatItem("Scores", _scores),
+          _buildStatItem("Test Sayısı", _followers),
+          _buildStatItem("Takipçi", _posts),
+          _buildStatItem("Takip", _scores),
         ],
       ),
     );
@@ -129,9 +137,9 @@ class UserProfilePage extends StatelessWidget {
   Widget _buildBio(BuildContext context) {
     TextStyle bioTextStyle = TextStyle(
       fontFamily: 'Spectral',
-      fontWeight: FontWeight.w400,//try changing weight to w500 if not thin
+      fontWeight: FontWeight.w400, //try changing weight to w500 if not thin
       fontStyle: FontStyle.italic,
-      color: Color(0xFF799497),
+      //color: Color(0xFF799497),
       fontSize: 16.0,
     );
 
@@ -182,7 +190,7 @@ class UserProfilePage extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    "FOLLOW",
+                    "TAKİP ET",
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
@@ -205,7 +213,7 @@ class UserProfilePage extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Text(
-                      "MESSAGE",
+                      "MESAJ GÖNDER",
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ),
@@ -223,7 +231,8 @@ class UserProfilePage extends StatelessWidget {
     heightMedia = MediaQuery.of(context).size.height;
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: appBarTasarim(), //appbar'ın en sağına ayarlar simgesi konulacak
+      appBar: appBarTasarim(""), //appbar'ın en sağına ayarlar simgesi konulacak
+
       body: Stack(
         children: <Widget>[
           _buildCoverImage(screenSize),
@@ -245,11 +254,15 @@ class UserProfilePage extends StatelessWidget {
                   SizedBox(height: 8.0),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
-                    child: Align(alignment: Alignment.centerLeft,child: Text("Son Çözülenler",style: TextStyle(fontSize: 17),)),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Son Çözülen Testler",
+                          style: TextStyle(fontSize: 17,fontFamily: 'Roboto',fontWeight: FontWeight.w500),
+                        )),
                   ),
                   SizedBox(height: 8.0),
                   _buildLastSolved(),
-
                 ],
               ),
             ),
@@ -260,18 +273,17 @@ class UserProfilePage extends StatelessWidget {
   }
 
   _buildLastSolved() {
-    return  CarouselSlider.builder(
+    return CarouselSlider.builder(
         height: heightMedia * 0.27,
         itemCount: 5,
-        onPageChanged: (index) {
-
-        },
+        onPageChanged: (index) {},
         itemBuilder: (BuildContext context, int itemIndex) {
           return GradientCard(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
-            gradient: GradientColors.anasayfaswiper,
+            gradient: GradientColors.cardProfile,
+            shadowColor: Colors.white,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -282,7 +294,7 @@ class UserProfilePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text("Bu bir sorudur.??? Soru soru"),
+                    Text("En Sevdiğin müzik kategorisi ? ",style: TextStyle(fontSize: 16,fontFamily: 'Roboto',fontWeight: FontWeight.w400),),
                   ],
                 ),
                 Spacer(),
@@ -292,7 +304,7 @@ class UserProfilePage extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(right: 20, bottom: 20),
-                      child: Text('${itemIndex + 1}'),
+                      child: Text('${itemIndex + 1}',style: TextStyle(fontFamily: 'Roboto',fontSize: 16,fontWeight: FontWeight.w600),),
                     ),
                   ],
                 ),
