@@ -44,7 +44,7 @@ Widget kategoriler() {
   ];
 
   return Scaffold(
-    appBar: appBarTasarim(),
+    appBar: appBarTasarim(""),
     body: Container(
       decoration: BoxDecoration(
         gradient: GradientColors.arkaplan,

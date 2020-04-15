@@ -40,7 +40,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
         debugShowCheckedModeBanner: false,
           home: 
                Scaffold(
-                 appBar: appBarTasarim(),
+                 appBar: appBarTasarim(""),
           backgroundColor: _dark ? null : Colors.grey.shade200,
           
           // appBar: AppBar(
