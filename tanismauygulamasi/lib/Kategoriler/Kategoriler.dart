@@ -6,6 +6,7 @@ import 'package:tanismauygulamasi/Sayfalar/gradientcolor.dart';
 import 'package:tanismauygulamasi/animasyon_widgets/BouncyPageRoute.dart';
 
 class Kategoriler extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return kategoriler();
@@ -48,28 +49,24 @@ Widget kategoriler() {
       decoration: BoxDecoration(
         gradient: GradientColors.arkaplan,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          GridView.builder(
-              shrinkWrap: true,
-              primary: true,
-              itemCount: kategoriIsmi.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 5,
-                crossAxisSpacing: 5,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return kategoriView(
-                  context,
-                  kategoriIsmi[index],
-                  kategoriImageURL[index],
-                  index,
-                );
-              }),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+            itemCount: kategoriIsmi.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.5,
+              mainAxisSpacing: 5,
+              crossAxisSpacing: 5,
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              return kategoriView(
+                context,
+                kategoriIsmi[index],
+                kategoriImageURL[index],
+                index,
+              );
+            }),
       ),
     ),
   );
@@ -88,7 +85,7 @@ Widget kategoriView(
       );
     },
     child: GradientCard(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.fromLTRB(25, 10, 25, 10),
       gradient: renkler[index].gradient,
       elevation: 5,
       shape: RoundedRectangleBorder(
@@ -97,10 +94,13 @@ Widget kategoriView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            kategoriIsim,
-            style: TextStyle(fontSize: 18, color: Colors.white),
-            textAlign: TextAlign.start,
+          Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Text(
+              kategoriIsim,
+              style: TextStyle(fontSize: 18, color: Colors.white,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),
+              textAlign: TextAlign.start,
+            ),
           ),
           Expanded(
             child: ClipRRect(
