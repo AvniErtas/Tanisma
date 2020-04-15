@@ -6,7 +6,6 @@ import 'package:tanismauygulamasi/Sayfalar/gradientcolor.dart';
 import 'package:tanismauygulamasi/animasyon_widgets/BouncyPageRoute.dart';
 
 class Kategoriler extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return kategoriler();
@@ -81,7 +80,8 @@ Widget kategoriView(
   return InkWell(
     onTap: () {
       Navigator.push(
-          (context), BouncyPageRoute(widget: GonderiTipi()),
+        (context),
+        BouncyPageRoute(widget: GonderiTipi()),
       );
     },
     child: GradientCard(
@@ -98,7 +98,13 @@ Widget kategoriView(
             padding: const EdgeInsets.all(3.0),
             child: Text(
               kategoriIsim,
-              style: TextStyle(fontSize: 18, color: Colors.white,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'roboto',
+              ),
               textAlign: TextAlign.start,
             ),
           ),
@@ -116,6 +122,3 @@ Widget kategoriView(
     ),
   );
 }
-
-
-

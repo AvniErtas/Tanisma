@@ -39,11 +39,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 : Theme.of(context).primaryColor,
           )),
       onPressed: () {
-        // TODO:
+      (context as Element).reassemble();
+
       },
     );
   }
-
+  Function callback;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -55,18 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
           elevation: 0,
           brightness: Brightness.dark,
           iconTheme: new IconThemeData(color: Theme.of(context).highlightColor),
-          leading: new IconButton(
-            icon: new Icon(Icons.menu),
-            onPressed: () {
-              // TODO:
-            },
-          ),
-          actions: <Widget>[_buildTextButton('settings'.toUpperCase(), true)],
+        
+          actions: <Widget>[_buildTextButton('PAYLAŞ'.toUpperCase(), true)],
         ),
         body: new Column(
           children: <Widget>[
             new Expanded(
               child: SpringSlider(
+                callback: callback,
                   markCount: 12,
                   positiveColor: Theme.of(context).highlightColor,
                   negativeColor: Theme.of(context).primaryColor),
@@ -75,9 +72,9 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Theme.of(context).highlightColor,
               child: new Row(
                 children: <Widget>[
-                  _buildTextButton('more'.toUpperCase(), false),
+                  _buildTextButton('TEKRAR GÖSTER'.toUpperCase(), false),
                   new Expanded(child: new Container()),
-                  _buildTextButton('stats'.toUpperCase(), false),
+                  _buildTextButton('DEVAM ET'.toUpperCase(), false),
                 ],
               ),
             )
@@ -92,8 +89,8 @@ class SpringSlider extends StatefulWidget {
   final int markCount;
   final Color positiveColor;
   final Color negativeColor;
-
-  SpringSlider({this.markCount, this.negativeColor, this.positiveColor});
+Function callback;
+  SpringSlider({this.markCount, this.negativeColor, this.positiveColor,this.callback});
 
   @override
   _SpringSliderState createState() => _SpringSliderState();
@@ -108,6 +105,7 @@ class _SpringSliderState extends State<SpringSlider>
   SpringySliderController sliderController;
   StreamSubscription periodicSub;
   bool isStopped = false; //global
+  
   @override
   void initState() {
     // TODO: implement initState
@@ -694,7 +692,7 @@ class Points extends StatelessWidget {
         FractionalTranslation(
           translation: Offset(-0.05 * percent, isAboveSlider ? 0.18 : -0.18),
           child: new Text(
-            "$points",
+            "% $points",
             style: new TextStyle(
               fontSize: pointTextSize,
               color: color,
@@ -710,12 +708,12 @@ class Points extends StatelessWidget {
               new Padding(
                 padding: EdgeInsets.only(bottom: 4.0),
                 child: Text(
-                  'POINTS',
+                  '',
                   style:
                   new TextStyle(fontWeight: FontWeight.bold, color: color),
                 ),
               ),
-              new Text(isPointsYouNeed ? 'YOU NEED' : 'YOU HAVE',
+              new Text(isPointsYouNeed ? 'KALAN' : 'EŞLEŞME',
                   style:
                   new TextStyle(fontWeight: FontWeight.bold, color: color))
             ],

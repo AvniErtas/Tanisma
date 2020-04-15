@@ -23,13 +23,23 @@ class SonucInceleme extends StatelessWidget {
               gradient: GradientColors2.listGradient,
               child: Center(
                 child: ListTile(
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: FlutterLogo(size: 56.0),
+                  leading: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(30.0),
+                        child: Image.asset("assets/profile.jpeg"),
+                      ),
+                      VerticalDivider(
+                        color: Colors.white,
+                        width: 10,
+                        thickness: 1.50,
+                      ),
+                    ],
                   ),
                   title: Text(
                     'Avni Ertaş',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 5),
@@ -38,6 +48,11 @@ class SonucInceleme extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Test Puanı : ',
+                          style: TextStyle(
+                            fontFamily: 'roboto',
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                          ),
                         ),
                         Container(
                           alignment: Alignment.center,
@@ -47,7 +62,14 @@ class SonucInceleme extends StatelessWidget {
                             color: Colors.indigo,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Text("35",style: TextStyle(color: Colors.white,),textAlign: TextAlign.center,),
+                          child: Text(
+                            "35",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ],
                     ),
