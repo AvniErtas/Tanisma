@@ -30,7 +30,7 @@ Widget kategoriler() {
   List<String> kategoriImageURL = [
     "images/kategoriresimler/Eglence.png",
     "images/kategoriresimler/Kitap.png",
-    "images/kategoriresimler/İs.png",
+    "images/kategoriresimler/is.png",
     "images/kategoriresimler/Film-Dizi.png",
     "images/kategoriresimler/Gezi.png",
     "images/kategoriresimler/Aile.png",

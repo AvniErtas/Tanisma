@@ -239,10 +239,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.push(
+                 /* Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => FilterChipDisplay()));
+                          builder: (context) => FilterChipDisplay()));*/
+                  showDialog(
+                      context: context,
+                      builder: (_) => Material(
+                        type: MaterialType.transparency,
+                        child: Center( // Aligns the container to center
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: FilterChipDisplay(),
+                            ),
+                        ),
+                      )
+                  );
                 },
                 child: Text("Filter Chip Bölümü "),
               ),

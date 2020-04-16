@@ -9,33 +9,26 @@ class _FilterChipDisplayState extends State<FilterChipDisplay> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return new Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_forward,
-              color: Colors.white,
-            ),
-            onPressed: () {}),
-        title: Text(
-          "Filter Result",
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(
-                Icons.arrow_forward,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                //
-              }),
-        ],
+    return Container(
+      padding: EdgeInsets.all(4),
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.circular(12.0),
       ),
-      body: Column(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
+          Align(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                  child: Icon(
+                Icons.close,
+                size: 35,
+                color: Colors.white,
+              ))),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
@@ -62,40 +55,20 @@ class _FilterChipDisplayState extends State<FilterChipDisplay> {
               )),
             ),
           ),
-          Divider(
-            color: Colors.blueGrey,
-            height: 10.0,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: _titleContainer('Kimler İçin ?'),
-            ),
-          ),
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                child: Wrap(
-                  spacing: 5.0,
-                  runSpacing: 5.0,
-                  children: <Widget>[
-                    filterChipWidget(chipName: 'Upper Manhattan'),
-                    filterChipWidget(chipName: 'Manhattanville'),
-                    filterChipWidget(chipName: 'Harlem'),
-                    filterChipWidget(chipName: 'Washington Heights'),
-                    filterChipWidget(chipName: 'Inwood'),
-                    filterChipWidget(chipName: 'Morningside Heights'),
-                  ],
-                ),
+            padding: const EdgeInsets.all(8.0),
+            child: RaisedButton(
+              onPressed: () {},
+              color: Colors.green,
+              child: Text(
+                "Filtrele",
+                style: TextStyle(color: Colors.white),
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius:
+                new BorderRadius.circular(15.0),
               ),
             ),
-          ),
-          Divider(
-            color: Colors.blueGrey,
-            height: 10.0,
           ),
         ],
       ),
@@ -107,7 +80,7 @@ Widget _titleContainer(String myTitle) {
   return Text(
     myTitle,
     style: TextStyle(
-        color: Colors.black, fontSize: 24.0, fontWeight: FontWeight.bold),
+        color: Colors.white, fontSize: 24.0, fontWeight: FontWeight.bold),
   );
 }
 
