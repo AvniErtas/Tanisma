@@ -13,10 +13,9 @@ class PaylasmaSonrasi extends StatelessWidget {
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-
           Expanded(
             child: ListView.builder(
-              itemCount:10,
+              itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   height: cardHeight,
@@ -25,7 +24,7 @@ class PaylasmaSonrasi extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
                     ),
-                    gradient: GradientColors2.listGradient,
+                    gradient: GradientColors2.bourbon,
                     child: Center(
                       child: ListTile(
                         title: Text(
@@ -40,7 +39,6 @@ class PaylasmaSonrasi extends StatelessWidget {
               },
             ),
           ),
-          Text("hello"),
         ],
       ),
     );

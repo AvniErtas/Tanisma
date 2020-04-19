@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tanismauygulamasi/Sayfalar/gradientcard.dart';
 import 'package:tanismauygulamasi/Sayfalar/gradientcolor.dart';
+import 'package:tanismauygulamasi/onur_pages/gradient.dart';
 
 class AbcdTestBolumu extends StatefulWidget {
   @override
@@ -78,7 +79,7 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("images/digericonlar/geri.png"),
+                      image: AssetImage("images/digericonlar/onceki.png"),
                     ),
                   ),
                 ),
@@ -98,7 +99,7 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("images/digericonlar/ileri.png"),
+                      image: AssetImage("images/digericonlar/sonraki.png"),
                     ),
                   ),
                 ),
@@ -138,11 +139,16 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
                 height: heightMedia * 0.09,
                 margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                 decoration: BoxDecoration(
-                  gradient: renkler[index + 12].gradient,
+                  /* gradient: renkler[index + 12].gradient, */
+                  gradient: GradientColors2.purplewhite,
                   borderRadius: BorderRadius.circular(15.0),
                   border: border[index],
                 ),
-                child: Center(child: Text("Bu bir şıktır")),
+                child: Center(
+                    child: Text(
+                  "Bu bir şıktır",
+                  style: TextStyle(color: Colors.white),
+                )),
               ),
             ),
           );
@@ -169,7 +175,7 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
-            gradient: GradientColors.anasayfaswiper,
+            gradient: GradientColors2.lovetonight,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -180,7 +186,7 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text("Bu bir sorudur.??? Soru soru"),
+                    Text("Bu bir sorudur.??? Soru soru",style: TextStyle(color: Colors.white),),
                   ],
                 ),
                 Spacer(),
@@ -190,7 +196,7 @@ class _AbcdTestBolumuState extends State<AbcdTestBolumu> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(right: 20, bottom: 20),
-                      child: Text('${itemIndex + 1}'),
+                      child: Text('${itemIndex + 1}',style: TextStyle(color: Colors.white),),
                     ),
                   ],
                 ),

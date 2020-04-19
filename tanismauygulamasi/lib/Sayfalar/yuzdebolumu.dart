@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:tanismauygulamasi/onur_pages/gradient.dart';
 import 'gradientcard.dart';
 import 'gradientcolor.dart';
 import 'dart:math';
@@ -65,7 +66,7 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        gradient: GradientColors.anasayfaswiper,
+        gradient: GradientColors2.lovetonight,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -76,7 +77,7 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text("asdf"),
+                Text("asdf",style: TextStyle(color: Colors.white),),
               ],
             ),
             Spacer(),
@@ -86,7 +87,7 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 20, bottom: 20),
-                  child: Text('$itemIndex'),
+                  child: Text('$itemIndex',style: TextStyle(color: Colors.white),),
                 ),
               ],
             ),
@@ -115,7 +116,7 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("images/digericonlar/geri.png"),
+                      image: AssetImage("images/digericonlar/onceki.png"),
                     ),
                   ),
                 ),
@@ -135,7 +136,7 @@ class YuzdeBolumuState extends State<YuzdeBolumu> {
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("images/digericonlar/ileri.png"),
+                      image: AssetImage("images/digericonlar/sonraki.png"),
                     ),
                   ),
                 ),

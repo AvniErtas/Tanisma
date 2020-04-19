@@ -21,19 +21,35 @@ class Testler extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
-              gradient: GradientColors2.listGradient,
+              gradient: GradientColors2.purplelove,
               child: Center(
                 child: ListTile(
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
-                    child: FlutterLogo(size: 56.0),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: width*0.2,
+                      height: height*0.08,
+                      child: Image.asset("images/kategoriresimler/Eglence.png",
+                          fit: BoxFit.contain),
+                    ),
                   ),
-                  title: Text('Lorem ipsum dolor sit amet, ante metus, in etiam diam.',style: TextStyle(fontSize: 16),),
+                  title: Text(
+                    'Lorem ipsum dolor sit amet, ante metus, in etiam diam.',
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 5),
-                    child: Text('Soru Sayısı: 15',textAlign: TextAlign.end,),
+                    child: Text(
+                      'Soru Sayısı: 15',
+                      textAlign: TextAlign.end,
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  trailing: Icon(Icons.more_vert),
+                  trailing: Icon(
+                    Icons.more_vert,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
@@ -41,6 +57,5 @@ class Testler extends StatelessWidget {
         },
       ),
     );
-
   }
 }

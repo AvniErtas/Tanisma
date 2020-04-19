@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:tanismauygulamasi/onur_pages/gradient.dart';
 
 import 'gradientcard.dart';
 import 'gradientcolor.dart';
@@ -10,30 +11,61 @@ class EvetHayirBolumu extends StatefulWidget {
   _EvetHayirBolumuState createState() => _EvetHayirBolumuState();
 }
 
-class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
+class _EvetHayirBolumuState extends State<EvetHayirBolumu>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+  Animation animation;
+
   int _current = 0;
   int soruNo = 0;
+
   List<int> siklar = new List<int>(5);
   List<double> animatedContainerSize = new List<double>(2);
+
   CarouselSlider carouselSlider;
 
   @override
   void initState() {
-    animatedContainerSize[0]=100.0;
-    animatedContainerSize[1]=100.0;
+    animatedContainerSize[0] = 100.0;
+    animatedContainerSize[1] = 100.0;
+
     super.initState();
+    _controller =
+        AnimationController(duration: const Duration(seconds: 10), vsync: this);
+    animation = ColorTween(begin: Colors.blue[50], end: Colors.blue[300])
+        .animate(_controller);
+
+    _controller.addListener(() {
+      setState(() {});
+    });
+    _controller.forward();
+    _controller.addStatusListener(
+      (durum) {
+        if (durum == AnimationStatus.completed) {
+          _controller.reverse().orCancel;
+        } else if (durum == AnimationStatus.dismissed) {
+          _controller.forward().orCancel; //sonsuza kadar devam edebilir.
+        }
+      },
+    );
   }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
+      backgroundColor: animation.value,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           Expanded(
             child: Container(
-              decoration: BoxDecoration(gradient: GradientColors.arkaplan),
               child: testevethayirBolumu(),
             ),
           ),
@@ -43,7 +75,6 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
   }
 
   Widget testevethayirBolumu() {
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -53,14 +84,13 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
           children: <Widget>[
             InkWell(
               onTap: () {
-
                 setState(() {
                   siklar[soruNo] = 0;
-                  animatedContainerSize[0]=150.0;
+                  animatedContainerSize[0] = 150.0;
                 });
                 Future.delayed(const Duration(milliseconds: 500), () {
                   setState(() {
-                    animatedContainerSize[0]=100.0;
+                    animatedContainerSize[0] = 100.0;
                   });
                 });
 
@@ -76,7 +106,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
                 padding: EdgeInsets.all(10),
                 margin: EdgeInsets.all(10),
                 decoration: BoxDecoration(
-             //       border: border[0],
+                  //       border: border[0],
                   image: DecorationImage(
                     image: AssetImage("images/digericonlar/evet.png"),
                   ),
@@ -85,19 +115,19 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
             ),
             InkWell(
               onTap: () {
+                setState(() {
+                  siklar[soruNo] = 1;
+                  animatedContainerSize[1] = 150;
+                });
+                Future.delayed(const Duration(milliseconds: 500), () {
                   setState(() {
-                    siklar[soruNo] = 1;
-                    animatedContainerSize[1]=150;
+                    animatedContainerSize[1] = 100;
                   });
-                  Future.delayed(const Duration(milliseconds: 500), () {
-                    setState(() {
-                      animatedContainerSize[1]=100;
-                    });
-                  });
+                });
 
-                  carouselSlider.previousPage(
-                      duration: Duration(milliseconds: 600),
-                      curve: Curves.linear);
+                carouselSlider.previousPage(
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.linear);
               },
               child: AnimatedContainer(
                 duration: Duration(milliseconds: 300),
@@ -125,19 +155,18 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
       onPageChanged: (index) {
         setState(() {
           soruNo = index;
-          animatedContainerSize[0]=100.0;
-          animatedContainerSize[1]=100.0;
+          animatedContainerSize[0] = 100.0;
+          animatedContainerSize[1] = 100.0;
           if (siklar[index] != null) {
             animatedContainerSize[siklar[index]] = 150.0;
           }
-
         });
       },
       itemBuilder: (BuildContext context, int itemIndex) => GradientCard(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
-        gradient: GradientColors.anasayfaswiper,
+        gradient: GradientColors2.sexyblue,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +177,10 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text("asdf"),
+                Text(
+                  "asdf",
+                  style: TextStyle(color: Colors.white),
+                ),
               ],
             ),
             Spacer(),
@@ -158,7 +190,10 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.only(right: 20, bottom: 20),
-                  child: Text('${itemIndex + 1}'),
+                  child: Text(
+                    '${itemIndex + 1}',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -188,7 +223,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("images/digericonlar/geri.png"),
+                      image: AssetImage("images/digericonlar/onceki.png"),
                     ),
                   ),
                 ),
@@ -208,7 +243,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
                   margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("images/digericonlar/ileri.png"),
+                      image: AssetImage("images/digericonlar/sonraki.png"),
                     ),
                   ),
                 ),
@@ -218,7 +253,6 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu> {
         ]);
   }
 }
-
 
 /* Container(
           alignment: Alignment.center,

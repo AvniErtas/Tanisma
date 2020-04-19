@@ -20,7 +20,7 @@ class SonucInceleme extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
-              gradient: GradientColors2.listGradient,
+              gradient: GradientColors2.lovetonight,
               child: Center(
                 child: ListTile(
                   leading: Row(
@@ -39,7 +39,7 @@ class SonucInceleme extends StatelessWidget {
                   ),
                   title: Text(
                     'Avni Ertaş',
-                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 5),
@@ -51,7 +51,7 @@ class SonucInceleme extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'roboto',
                             fontWeight: FontWeight.w500,
-                            color: Colors.black,
+                            color: Colors.white,
                           ),
                         ),
                         Container(
@@ -59,7 +59,7 @@ class SonucInceleme extends StatelessWidget {
                           height: 35,
                           width: 35,
                           decoration: BoxDecoration(
-                            color: Colors.indigo,
+                            color: Colors.indigoAccent,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
@@ -74,7 +74,7 @@ class SonucInceleme extends StatelessWidget {
                       ],
                     ),
                   ),
-                  trailing: Icon(Icons.share),
+                  trailing: Icon(Icons.share,color: Colors.black,),
                 ),
               ),
             ),

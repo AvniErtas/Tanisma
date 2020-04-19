@@ -120,7 +120,7 @@ class _AnaSayfaImage2State extends State<AnaSayfaImage2>
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
-                        gradient: GradientColors2.listGradient,
+                        gradient: GradientColors2.endlessriver,
                         child: Center(
                           child: ListTile(
                             leading: ClipRRect(
@@ -129,13 +129,14 @@ class _AnaSayfaImage2State extends State<AnaSayfaImage2>
                             ),
                             title: Text(
                               'Lorem ipsum dolor sit amet, ante metus, in etiam diam.',
-                              style: TextStyle(fontSize: 16),
+                              style: TextStyle(fontSize: 16,color: Colors.white),
                             ),
                             subtitle: Padding(
                               padding: const EdgeInsets.only(top: 5),
                               child: Text(
                                 'Soru Sayısı: $itemIndex',
                                 textAlign: TextAlign.end,
+                                style: TextStyle(color: Colors.white),
                               ),
                             ),
                             trailing: Icon(Icons.more_vert),
@@ -159,7 +160,7 @@ class _AnaSayfaImage2State extends State<AnaSayfaImage2>
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                         ),
-                        gradient: GradientColors2.listGradient,
+                        gradient: GradientColors2.purplelove,
                         child: Center(
                           child: ListTile(
                             leading: ClipRRect(

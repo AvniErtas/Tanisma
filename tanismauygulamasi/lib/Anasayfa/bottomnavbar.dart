@@ -5,6 +5,7 @@ import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:tanismauygulamasi/Anasayfa/baslangic.dart';
 import 'package:tanismauygulamasi/Kategoriler/Kategoriler.dart';
 import 'package:tanismauygulamasi/Sayfalar/arkadaslistesi.dart';
+import 'package:tanismauygulamasi/Sayfalar/deneme.dart';
 import 'package:tanismauygulamasi/Sayfalar/evethayir.dart';
 import 'package:tanismauygulamasi/Sayfalar/filterchip.dart';
 import 'package:tanismauygulamasi/Sayfalar/gonderitipi.dart';
@@ -100,7 +101,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               RaisedButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Kategoriler()));
+                      MaterialPageRoute(builder: (context) => KategoriBolumu()));
                 },
                 child: Text("Kategoriler"),
               ),
@@ -261,6 +262,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           builder: (context) => SettingsOnePage()));
                 },
                 child: Text("Ayarlar "),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage()));
+                },
+                child: Text("DenemeKartTasarim"),
               ),
             ],
           ),
