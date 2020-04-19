@@ -27,7 +27,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Widget _buildTextButton(String title, bool isOnLight) {
+
+  Widget _buildTextButton(String title, bool isOnLight,Function onPressed) {
     return new FlatButton(
       padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
       child: Text(title,
@@ -38,13 +39,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 ? Theme.of(context).highlightColor
                 : Theme.of(context).primaryColor,
           )),
-      onPressed: () {
-      (context as Element).reassemble();
-
-      },
+      onPressed: () => onPressed(),
     );
   }
-  Function callback;
+  tekrar_goster() {
+    int y=0;
+    bool isStopped = false; //global
+
+    Timer.periodic(Duration(milliseconds: 50), (timer) {
+
+      setState(() {
+        if (isStopped) {
+          timer.cancel();
+        }
+        y=y+1;
+        _SpringSliderState.sliderController._sliderPercent = y/100;
+        if(y==30) isStopped = true;
+      });
+
+    });
+  }
+  paylas(){}
+  devam_et(){}
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -57,13 +73,12 @@ class _MyHomePageState extends State<MyHomePage> {
           brightness: Brightness.dark,
           iconTheme: new IconThemeData(color: Theme.of(context).highlightColor),
         
-          actions: <Widget>[_buildTextButton('PAYLAŞ'.toUpperCase(), true)],
+          actions: <Widget>[_buildTextButton('SONUÇLARI İNCELE'.toUpperCase(), true,paylas)],
         ),
         body: new Column(
           children: <Widget>[
             new Expanded(
               child: SpringSlider(
-                callback: callback,
                   markCount: 12,
                   positiveColor: Theme.of(context).highlightColor,
                   negativeColor: Theme.of(context).primaryColor),
@@ -72,9 +87,9 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Theme.of(context).highlightColor,
               child: new Row(
                 children: <Widget>[
-                  _buildTextButton('TEKRAR GÖSTER'.toUpperCase(), false),
+                  _buildTextButton('TEKRAR GÖSTER'.toUpperCase(), false,tekrar_goster),
                   new Expanded(child: new Container()),
-                  _buildTextButton('DEVAM ET'.toUpperCase(), false),
+                  _buildTextButton('DEVAM ET'.toUpperCase(), false,devam_et),
                 ],
               ),
             )
@@ -102,7 +117,7 @@ class _SpringSliderState extends State<SpringSlider>
   final double paddingBottom = 50.0;
   double i=0.1;
   int y=0;
-  SpringySliderController sliderController;
+  static SpringySliderController sliderController;
   StreamSubscription periodicSub;
   bool isStopped = false; //global
   
