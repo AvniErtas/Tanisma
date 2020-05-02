@@ -263,4 +263,10 @@ class GradientColors2 {
     Color(0xffaa076b),
     Color(0xff61045f),
   ]);
+  static LinearGradient denemekart =
+  buildGradient(_beginAlignment, _endAlignment, const [
+    Color(0xff6DC8F3),
+    Color(0xff73A1F9),
+  ]);
+
 }

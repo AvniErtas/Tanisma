@@ -14,6 +14,7 @@ import 'package:tanismauygulamasi/Sayfalar/paylasmasonrasi.dart';
 import 'package:tanismauygulamasi/Sayfalar/profile.dart';
 import 'package:tanismauygulamasi/Sayfalar/settings_yeni.dart';
 import 'package:tanismauygulamasi/Sayfalar/sonuc_inceleme.dart';
+import 'package:tanismauygulamasi/Sayfalar/sorusecme_hazirlama.dart';
 import 'package:tanismauygulamasi/Sayfalar/swiper.dart';
 import 'package:tanismauygulamasi/animasyon_widgets/BouncyPageRoute.dart';
 import 'package:tanismauygulamasi/eslesme/springy.dart';
@@ -283,6 +284,15 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           builder: (context) => HomePage()));
                 },
                 child: Text("DenemeKartTasarim"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SoruSecmeVeHazirlama()));
+                },
+                child: Text("Soru Seçme ve Hazirlama"),
               ),
             ],
           ),

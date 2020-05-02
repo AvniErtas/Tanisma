@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui' as ui;
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:tanismauygulamasi/onur_pages/gradient.dart';
 
+import 'deneme.dart';
 import 'gradientcard.dart';
 import 'gradientcolor.dart';
 
@@ -32,7 +34,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
     super.initState();
     _controller =
         AnimationController(duration: const Duration(seconds: 10), vsync: this);
-    animation = ColorTween(begin: Colors.blue[50], end: Colors.blue[300])
+    animation = ColorTween(begin: Colors.white, end: Colors.lightBlueAccent)
         .animate(_controller);
 
     _controller.addListener(() {
@@ -162,40 +164,69 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
           }
         });
       },
-      itemBuilder: (BuildContext context, int itemIndex) => GradientCard(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-        gradient: GradientColors2.sexyblue,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      itemBuilder: (BuildContext context, int itemIndex) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Stack(
           children: <Widget>[
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "asdf",
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-            Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 20, bottom: 20),
-                  child: Text(
-                    '${itemIndex + 1}',
-                    style: TextStyle(color: Colors.white),
+            Container(
+
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                gradient: LinearGradient(colors: [
+                  Color(0xff6DC8F3),
+                  Color(0xff73A1F9)
+                ], begin: Alignment.topLeft, end: Alignment.bottomRight),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xff73A1F9),
+                    blurRadius: 5,
+                    //offset: Offset(0, 6),
                   ),
-                ),
-              ],
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "En Sevdiğin Oyun Satranç Mı ?",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(right: 20, bottom: 20),
+                        child: Text(
+                          '${itemIndex + 1}',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              right: 0,
+              bottom: 0,
+              top: 0,
+              child: CustomPaint(
+                size: Size(100, 150),
+                painter: CustomCardShapePainter(12,
+                    Color(0xff6DC8F3),
+                    Color(0xff73A1F9),),
+              ),
             ),
           ],
         ),
@@ -253,64 +284,3 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
         ]);
   }
 }
-
-/* Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.all(10),
-          margin: EdgeInsets.all(10),
-          height: 200,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: GradientColors.anasayfaswiper,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Text(
-            "Sorular Burada Olacak",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
-            ),
-          ),
-        ), */
-
-/* 
-Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            /* Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("images/digericonlar/geri.png"),
-                    ),
-                  ),
-                ),
-              ),
-            ), */
-            /* Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () {},
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("images/digericonlar/ileri.png"),
-                    ),
-                  ),
-                ),
-              ),
-            ), */
-          ],
-        ), */
