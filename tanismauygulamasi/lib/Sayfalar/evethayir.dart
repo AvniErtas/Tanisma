@@ -17,7 +17,7 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation animation;
-
+  int index=0;
   int _current = 0;
   int soruNo = 0;
 
@@ -81,7 +81,14 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         buttonDemo(),
-        Row(
+       soruSecimleri(index),
+      ],
+    );
+  }
+  Widget soruSecimleri(int index) {
+    switch(index) {
+      case 0:
+        return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             InkWell(
@@ -146,11 +153,78 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
               ),
             ),
           ],
-        )
-      ],
-    );
-  }
+        );
+        break;
+      case 1:
+       return  Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            InkWell(
+              onTap: () {
+                setState(() {
+                  siklar[soruNo] = 0;
+                  animatedContainerSize[0] = 150.0;
+                });
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  setState(() {
+                    animatedContainerSize[0] = 100.0;
+                  });
+                });
 
+                carouselSlider.nextPage(
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.linear);
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.fastLinearToSlowEaseIn,
+                height: animatedContainerSize[0],
+                width: animatedContainerSize[0],
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  //       border: border[0],
+                  image: DecorationImage(
+                    image: AssetImage("images/digericonlar/hayir.png"),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  siklar[soruNo] = 1;
+                  animatedContainerSize[1] = 150;
+                });
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  setState(() {
+                    animatedContainerSize[1] = 100;
+                  });
+                });
+
+                carouselSlider.previousPage(
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.linear);
+              },
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.fastLinearToSlowEaseIn,
+                height: animatedContainerSize[1],
+                width: animatedContainerSize[1],
+                padding: EdgeInsets.all(10),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/digericonlar/hayir.png"),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+        break;
+    }
+  }
   Widget buttonDemo() {
     carouselSlider = CarouselSlider.builder(
       itemCount: 5,
@@ -263,6 +337,9 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
             Flexible(
               child: InkWell(
                 onTap: () {
+                  setState(() {
+                    index++;
+                  });
                   carouselSlider.nextPage(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.linear);
