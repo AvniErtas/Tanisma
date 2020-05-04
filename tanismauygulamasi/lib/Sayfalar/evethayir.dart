@@ -20,8 +20,11 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
   int index=0;
   int _current = 0;
   int soruNo = 0;
-
+  double rating = 50;
   List<int> siklar = new List<int>(5);
+  List<Border> border = new List<Border>(4);
+  double heightMedia;
+  double widthMedia;
   List<double> animatedContainerSize = new List<double>(2);
 
   CarouselSlider carouselSlider;
@@ -60,18 +63,15 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
 
   @override
   Widget build(BuildContext context) {
+    heightMedia = MediaQuery.of(context).size.height;
+    widthMedia = MediaQuery.of(context).size.width;
     return Scaffold(
+      appBar: AppBar(),
       backgroundColor: animation.value,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              child: testevethayirBolumu(),
-            ),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Container(
+          child: testevethayirBolumu(),
+        ),
       ),
     );
   }
@@ -156,72 +156,11 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
         );
         break;
       case 1:
-       return  Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            InkWell(
-              onTap: () {
-                setState(() {
-                  siklar[soruNo] = 0;
-                  animatedContainerSize[0] = 150.0;
-                });
-                Future.delayed(const Duration(milliseconds: 500), () {
-                  setState(() {
-                    animatedContainerSize[0] = 100.0;
-                  });
-                });
-
-                carouselSlider.nextPage(
-                    duration: Duration(milliseconds: 600),
-                    curve: Curves.linear);
-              },
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.fastLinearToSlowEaseIn,
-                height: animatedContainerSize[0],
-                width: animatedContainerSize[0],
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  //       border: border[0],
-                  image: DecorationImage(
-                    image: AssetImage("images/digericonlar/hayir.png"),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  siklar[soruNo] = 1;
-                  animatedContainerSize[1] = 150;
-                });
-                Future.delayed(const Duration(milliseconds: 500), () {
-                  setState(() {
-                    animatedContainerSize[1] = 100;
-                  });
-                });
-
-                carouselSlider.previousPage(
-                    duration: Duration(milliseconds: 600),
-                    curve: Curves.linear);
-              },
-              child: AnimatedContainer(
-                duration: Duration(milliseconds: 300),
-                curve: Curves.fastLinearToSlowEaseIn,
-                height: animatedContainerSize[1],
-                width: animatedContainerSize[1],
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("images/digericonlar/hayir.png"),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
+       return  sliderTasarim();
+//    altProfilBolumu(),
+        break;
+      case 2:
+        return abcdSiklari();
         break;
     }
   }
@@ -360,4 +299,88 @@ class _EvetHayirBolumuState extends State<EvetHayirBolumu>
           ]),
         ]);
   }
+  Widget sliderTasarim() {
+    return Column(
+      children: <Widget>[
+        Container(
+          alignment: Alignment.center,
+          height: MediaQuery.of(context).size.height * 0.06,
+          width: MediaQuery.of(context).size.width * 0.12,
+          decoration: BoxDecoration(
+            color: siklar[soruNo]==null ? Colors.indigo : Colors.green,
+            borderRadius: BorderRadius.all(Radius.circular(30)),
+          ),
+          child: Text(
+            "${rating.toInt()}",
+            style: TextStyle(fontSize: 20, color: Colors.white),
+          ),
+        ),
+        Slider(
+          value: rating,
+          min: 0,
+          max: 100,
+          //label: "${rating.toInt()}",
+          activeColor: Colors.pink,
+          divisions: 100,
+          inactiveColor: Colors.white,
+          onChanged: (newRating) {
+            setState(() {
+              rating = newRating;
+              siklar[soruNo] = newRating.toInt();
+            });
+          },
+        ),
+      ],
+    );
+  }
+  Widget abcdSiklari() {
+    return SizedBox(
+      height: heightMedia * 0.4,
+      child: ListView.builder(
+          itemCount: 4,
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (BuildContext context, int index) {
+            return Material(
+              color: Colors.white.withOpacity(0.0),
+              child: InkWell(
+                onTap: () => {
+                  this.setState(() {
+                    siklar[soruNo] = index;
+
+                    for (int i = 0; i < border.length; i++) {
+                      if (i != index) border[i] = null;
+                    }
+                    border[index] = Border.all(width: 5);
+                    carouselSlider.nextPage(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.linear);
+                    Future.delayed(const Duration(milliseconds: 500), () {
+                      setState(() {
+                        border[index] = null;
+                      });
+                    });
+                  })
+                },
+                child: Container(
+
+                  height: heightMedia * 0.075,
+                  margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                  decoration: BoxDecoration(
+                    /* gradient: renkler[index + 12].gradient, */
+                    gradient: GradientColors2.purplewhite,
+                    borderRadius: BorderRadius.circular(15.0),
+                    border: border[index],
+                  ),
+                  child: Center(
+                      child: Text(
+                        "Bu bir şıktır",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                ),
+              ),
+            );
+          }),
+    );
+  }
 }
+

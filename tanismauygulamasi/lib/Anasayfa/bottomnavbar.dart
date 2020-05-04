@@ -287,7 +287,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.push(
+                 Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => SoruSecmeVeHazirlama()));
