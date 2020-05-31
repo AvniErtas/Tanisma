@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tanismauygulamasi/Sayfalar/gradientcard.dart';
 import 'package:tanismauygulamasi/onur_pages/gradient.dart';
+import 'package:tanismauygulamasi/test.dart';
 
 class SoruSecmeVeHazirlama extends StatefulWidget {
   @override
@@ -15,14 +16,18 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
   CarouselSlider slider;
   List<int> secilenSoruTipi = new List<int>(5);
   int soruNo = 0;
+  List<TextEditingController> _soru_controller =
+      List.generate(5, (i) => TextEditingController());
+  List<List<String>> _soru_siklari = new List(5);
+
   @override
   void initState() {
     super.initState();
     animatedContainerSize[0] = 1;
     animatedContainerSize[1] = 1.5;
     animatedContainerSize[2] = 1;
-    for(int i=0;i<secilenSoruTipi.length;i++){
-      secilenSoruTipi[i]=1; //default olarak abcd seçiyoruz
+    for (int i = 0; i < secilenSoruTipi.length; i++) {
+      secilenSoruTipi[i] = 1; //default olarak abcd seçiyoruz
     }
   }
 
@@ -57,8 +62,8 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
                         width: height * 0.10 * animatedContainerSize[0],
                         decoration: new BoxDecoration(
                           image: DecorationImage(
-                            image:
-                                new AssetImage('images/digericonlar/percent.png'),
+                            image: new AssetImage(
+                                'images/digericonlar/percent.png'),
                             fit: BoxFit.contain,
                           ),
                           shape: BoxShape.circle,
@@ -84,7 +89,8 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
                         width: height * 0.10 * animatedContainerSize[1],
                         decoration: new BoxDecoration(
                           image: DecorationImage(
-                            image: new AssetImage('images/digericonlar/abcd.png'),
+                            image:
+                                new AssetImage('images/digericonlar/abcd.png'),
                             fit: BoxFit.contain,
                           ),
                           shape: BoxShape.circle,
@@ -197,7 +203,9 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
               height: 10,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                kaydet();
+              },
               child: Container(
                 alignment: Alignment.center,
                 child: Text(
@@ -223,24 +231,24 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
       itemCount: 5,
       onPageChanged: (index) {
         setState(() {
-           soruNo = index;
-           switch(secilenSoruTipi[index]){
-             case 0:
-               animatedContainerSize[0]=1.5;
-               animatedContainerSize[1]=1;
-               animatedContainerSize[2]=1;
-               break;
-             case 1:
-               animatedContainerSize[0]=1;
-               animatedContainerSize[1]=1.5;
-               animatedContainerSize[2]=1;
-               break;
-             case 2:
-               animatedContainerSize[0]=1;
-               animatedContainerSize[1]=1;
-               animatedContainerSize[2]=1.5;
-               break;
-           }
+          soruNo = index;
+          switch (secilenSoruTipi[index]) {
+            case 0:
+              animatedContainerSize[0] = 1.5;
+              animatedContainerSize[1] = 1;
+              animatedContainerSize[2] = 1;
+              break;
+            case 1:
+              animatedContainerSize[0] = 1;
+              animatedContainerSize[1] = 1.5;
+              animatedContainerSize[2] = 1;
+              break;
+            case 2:
+              animatedContainerSize[0] = 1;
+              animatedContainerSize[1] = 1;
+              animatedContainerSize[2] = 1.5;
+              break;
+          }
 
           /*     animatedContainerSize[0] = 100.0;
               animatedContainerSize[1] = 100.0;
@@ -274,28 +282,13 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 // onFieldSubmitted: (_) => FocusScope.of(globalKey.currentContext).nextFocus(),
-                // controller: nameController,
+                controller: _soru_controller[itemIndex],
                 style: new TextStyle(
                   fontFamily: "Poppins",
                 ),
               ),
             ),
-            Visibility(
-              visible: secilenSoruTipi[soruNo]==1 ? true : false,
-              child: RaisedButton(
-                onPressed: () {
-                  _showDialog();
-                },
-                color: Colors.green,
-                child: Text(
-                  "Şıkları oluşturmak için tıkla",
-                  style: TextStyle(color: Colors.white),
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(15.0),
-                ),
-              ),
-            ),
+            sikButton(),
             Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -318,9 +311,18 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
   }
 
   void _showDialog() {
+    List<TextEditingController> _sik_controller =
+        List.generate(4, (i) => TextEditingController());
+    if (_soru_siklari[soruNo] != null) {
+      _sik_controller[0].text = _soru_siklari[soruNo][0];
+      _sik_controller[1].text = _soru_siklari[soruNo][1];
+      _sik_controller[2].text = _soru_siklari[soruNo][2];
+      _sik_controller[3].text = _soru_siklari[soruNo][3];
+    }
+
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext context_alert) {
         return AlertDialog(
           title: new Text("Şıkları giriniz"),
           content: SingleChildScrollView(
@@ -339,7 +341,7 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   // onFieldSubmitted: (_) => FocusScope.of(globalKey.currentContext).nextFocus(),
-                  // controller: nameController,
+                  controller: _sik_controller[0],
                   style: new TextStyle(
                     fontFamily: "Poppins",
                   ),
@@ -356,7 +358,7 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   // onFieldSubmitted: (_) => FocusScope.of(globalKey.currentContext).nextFocus(),
-                  // controller: nameController,
+                  controller: _sik_controller[1],
                   style: new TextStyle(
                     fontFamily: "Poppins",
                   ),
@@ -373,7 +375,7 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   // onFieldSubmitted: (_) => FocusScope.of(globalKey.currentContext).nextFocus(),
-                  // controller: nameController,
+                  controller: _sik_controller[2],
                   style: new TextStyle(
                     fontFamily: "Poppins",
                   ),
@@ -390,7 +392,7 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   // onFieldSubmitted: (_) => FocusScope.of(globalKey.currentContext).nextFocus(),
-                  // controller: nameController,
+                  controller: _sik_controller[3],
                   style: new TextStyle(
                     fontFamily: "Poppins",
                   ),
@@ -402,15 +404,41 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
             new FlatButton(
               child: new Text("İptal"),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.of(context_alert).pop();
                 //Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),
             new FlatButton(
               child: new Text("Tamam"),
               onPressed: () {
-                Navigator.of(context).pop();
-                //Navigator.of(context).popUntil((route) => route.isFirst);
+                List<String> _siklar = new List(4);
+                _siklar[0] = _sik_controller[0].text;
+                _siklar[1] = _sik_controller[1].text;
+                _siklar[2] = _sik_controller[2].text;
+                _siklar[3] = _sik_controller[3].text;
+                _siklar.forEach((f) {
+                  if (f.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: new Text("Şıklar boş olamaz"),
+                          actions: <Widget>[
+                            new FlatButton(
+                              child: new Text("Tamam"),
+                              onPressed: () {
+                                Navigator.of(context).popUntil((route) => route.isFirst);
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  } else {
+                    _soru_siklari[soruNo] = _siklar;
+                    Navigator.of(context).pop();
+                  }
+                });
               },
             ),
           ],
@@ -434,4 +462,82 @@ class _SoruSecmeVeHazirlamaState extends State<SoruSecmeVeHazirlama> {
       ),
     );
   }
+
+  void kaydet() {
+    int soru_sayisi = 5;
+    List<Sorular> sorular = new List<Sorular>();
+    for (int i = 0; i < soru_sayisi; i++) {
+      if(_soru_controller[i].text.isNotEmpty) {
+        int soru_tipi = secilenSoruTipi[i];
+        if(soru_tipi == 1) {
+          if(_soru_siklari[i] == null){
+            dialogSikBos(i);
+            break;
+          }
+          else {
+            Sorular soru = new Sorular(soruTipi:soru_tipi,siklar: _soru_siklari[i],soru: _soru_controller[i].text);
+            sorular.add(soru);
+          }
+        } else {
+          Sorular soru = new Sorular(soruTipi:soru_tipi,siklar: _soru_siklari[i],soru: _soru_controller[i].text);
+          sorular.add(soru);
+        }
+      }
+    }
+
+    Test test = new Test(kategori: "Kategori 1",olusturanTipi: "Kullanıcı",olusturanUid: "1234",sorular: sorular,);
+    debugPrint(test.toRawJson());
+
+  }
+
+  sikButton() {
+    if (secilenSoruTipi[soruNo] == 1 ? true : false)
+      return RaisedButton.icon(
+        icon:
+            _soru_siklari[soruNo] != null ? Icon(Icons.done) : Icon(Icons.add),
+        onPressed: () {
+          _showDialog();
+        },
+        color: Colors.green,
+        label: Text(
+          "Şıkları oluşturmak için tıkla",
+          style: TextStyle(color: Colors.white),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(15.0),
+        ),
+      );
+    else
+      return Container();
+  }
+
+  dialogSikBos(int i) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: new Text("Şıklı soru tipindeki sorularda şıklar boş olamaz (${i+1}.soru)"),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Tamam"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class Soru {
+  String soru;
+  int soruTipi;
+  List<String> siklar;
+
+  Soru(this.soru,this.soruTipi,{this.siklar});
+
+
+
 }
